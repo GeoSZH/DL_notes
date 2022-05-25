@@ -53,13 +53,20 @@
 
 ![image](https://user-images.githubusercontent.com/88269254/170200017-5f55a184-c5b9-491b-8c3c-2dcdb0d33df6.png)
 
+所以我们在挑选模型的时候我们希望能够选到一个比较中庸的模型，在实际的竞赛或者问题中，有的时候并不是测试集成绩最好的模型就一定是最好的，它在最后的验证集可能效果没那么好！
 
+这里李宏毅老师讲了**为什么需要验证集**？（或者说是private testing set）我第一遍没太听懂，第二遍懂了，也就是说哪怕我们是一个简单的model，它的输出是随机猜测的，你训练一次它输出一次，总有那么一次，它猜的全对，输出的结果与test答案完全一致！你能说这个模型是一个非常好的模型吗？当然不能，因为答案是固定的，总有一次能猜中。
 
+#### 怎么解决上述的困境？
+##### Cross Validation
+![image](https://user-images.githubusercontent.com/88269254/170204306-c3468296-c7c0-4101-8c94-aa61a8b26089.png)
 
+![image](https://user-images.githubusercontent.com/88269254/170205724-bb3e8813-16cb-4239-943c-03f959d6d775.png)
 
+### mismatch
+最后我们提到mismatch，我们上面说了test loss比较大的情况可能是overfitting，但没有说肯定是，那是因为还有一种情况是mismatch，它与overfitting最大的区别就是，overfitting可以通过搜集资料克服，但是mismatch是一些由外在影响导致的outlier，比如实例中的，过年那一天的观看人数，因为除夕夜大家都不会点开网站学机器学习，所以这一天就出现了mismatch的情况。
 
-
-
+或者更直观的说是，就是我们的测试集的分布与训练集是不同的，就可能会导致我们预测loss很大，mismatch。那我们如何判断它呢？这个就只能通过我们对实际的问题的理解，domain knowledge的帮助了，可以参考HW11.
 
 
 
