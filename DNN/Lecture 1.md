@@ -38,8 +38,38 @@
 这样我们就可以改进我们的model，从而写出更加复杂，更加有“**弹性**”的function。但此时我们用的仍是前一天的观看人数，那么如何给我们的model增加特征呢？More Features，我们只需要把sigmoid函数里面的**w**<sub>**i**</sub>**x**<sub>**1**</sub>替换掉即可，我们可以改变j的值换成7天的，换成28天甚至56天的特征。
 ![image](https://user-images.githubusercontent.com/88269254/170053196-55da1bce-51b6-4180-9346-40dc1677c474.png)
 
+但是这里面其实可能会有问题，可能有人会问，sigmoid函数（换成其他function也一样）的数量需要和feature数量一致吗？
+
+答案其实是**不需要一致**，这里只是为了方便，所以sigmoid函数取了三个，你也可以取大于feature数量的sigmoid，这也是可以决定的一个**hyper parameter**。
+
 到这里，其实就有点像我们神经网络的计算方式了（也可以说是感知机，但是sigmoid函数我觉得用神经网络更严谨一些），如下图：
 ![image](https://user-images.githubusercontent.com/88269254/170055155-25a5e395-032c-48fa-b64f-48cef7035f85.png)
 
+我们可以把上述的式子进行向量化，其中σ代表sigmoid函数
+![image](https://user-images.githubusercontent.com/88269254/170160582-0413b7f3-946f-487a-87b4-d5a8b16b32f0.png)
+
+我们有了新的function，接下来就是机器学习的第二步，也就是找到我们的**Loss**。这里的Loss其实与前面讲到的linear model里一致，只不过参数更多了。但意义仍是一样的。
+
+最后我们是Optimization，我们也还是通过Gradient Descent来找出我们的参数。用learning rate更新参数。
+![image](https://user-images.githubusercontent.com/88269254/170163539-2d948bbb-11d2-47e0-b3af-57932878310d.png)
+
+其实我们还可以用别的函数来表示我们的“**Hard sigmoid**”，比如Relu：
+![image](https://user-images.githubusercontent.com/88269254/170164360-ba2d013d-8128-4ef0-928d-c398a57d4a05.png)
+
+经过实验是Relu效果更好，至于为什么，可以看下面的解释，我们接下来先看实例。在实际过程中，我们通过增加Relu函数的数量，我们的Loss会越来越小，但似乎进步的没有我们想象中那么大，那怎么办？我们可以通过不断的Relu，增加layer来提高模型的拟合效果，实验结果如下：
+![image](https://user-images.githubusercontent.com/88269254/170168224-222d368d-d6be-4741-913a-8bb2624c86df.png)
+![image](https://user-images.githubusercontent.com/88269254/170168960-2a4d21bd-c3ac-4791-873e-24207f93d668.png)
+
+上图也给我们显示出了，可能我们会遇到**overfitting**的问题!
+
+### sigmoid or Relu？
+根据我们上面的介绍，我们知道我们最常用来表示Hard sigmoid的就是sigmoid和relu，这些我们统称为**激活函数**，那么到底谁更好呢？其实从经验来看应该是**Relu**
+#### Batch？
+而在我们实际过程中，其实我们是分batch计算并且更新参数的，那么为什么要这样分，有什么好处呢？
+![image](https://user-images.githubusercontent.com/88269254/170163655-722004df-249d-40a7-b893-4b86f7d97466.png)
+
+
+### Hyper Parameter
+总结一下我们目前已经知道的超参数就是，我们的learning rate, 多少个蓝色的function来拟合我们设想中的曲线， batch size， Hidden layers
 ### Gradient Descent真正的痛点？
 
